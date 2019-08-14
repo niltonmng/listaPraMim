@@ -3,8 +3,8 @@ package produtos;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemCompravel {
-
+public abstract class ItemCompravel {
+ 
 	private int id;
 	private String nome;
 	private Categoria categoria;

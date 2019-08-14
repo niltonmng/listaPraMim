@@ -6,5 +6,11 @@ public class ProdutoNaoIndustrializado extends ItemCompravel{
 		super(nome, categoria);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString() + "Preco por quilo: " + this.imprimePrecos();
+	}
+	
 }
