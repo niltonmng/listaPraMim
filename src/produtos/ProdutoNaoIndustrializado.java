@@ -1,0 +1,10 @@
+package produtos;
+
+public class ProdutoNaoIndustrializado extends ItemCompravel{
+
+	public ProdutoNaoIndustrializado(String nome, String categoria) {
+		super(nome, categoria);
+		// TODO Auto-generated constructor stub
+	}
+
+}
