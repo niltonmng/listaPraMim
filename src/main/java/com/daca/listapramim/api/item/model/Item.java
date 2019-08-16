@@ -19,7 +19,13 @@ public abstract class Item {
 	@NotNull
 	@Column(name = "categoria", nullable = false)
 	private Categoria categoria;
-
+	
+	
+	public Item(String nome, Categoria categoria) {
+		this.nome = nome;
+		this.categoria = categoria;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
