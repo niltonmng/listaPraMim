@@ -6,5 +6,14 @@ public class ProdutoQuantidadeFixa extends Item {
 		super(nome, categoria);
 	}
 	
-	
+
+	@Override
+	public Long getId() {
+		return this.getId();
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.setId(id);
+	}
 }
