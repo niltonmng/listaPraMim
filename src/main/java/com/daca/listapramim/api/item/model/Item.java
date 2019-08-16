@@ -4,9 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.daca.listapramim.api.utils.Model;
+
 @Entity
 @Table(name="tb_item")
-public abstract class Item {
+public abstract class Item implements Model<Long>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,35 +14,34 @@ import com.daca.listapramim.api.item.model.ProdutoUnidade;
 
 @Component("itemIO")
 public class ItemIO {
-	
+
 	private ModelMapper modelMapper;
 
 	final Converter<ItemInput, Item> itemInputConverter = new Converter<ItemInput, Item>() {
-		
+
 		public Item convert(MappingContext<ItemInput, Item> context) {
-			
+
 			ItemInput input = context.getSource();
-			
+
 			Item item = null;
-			if(input.getTipo().equalsIgnoreCase("unidade")) {
+			if (input.getTipo().equalsIgnoreCase("unidade")) {
 				item = new ProdutoUnidade(input.getNome(), Categoria.fromName(input.getCategoria()));
-			}else if(input.getTipo().equalsIgnoreCase("nao-industrializado")) {
+			} else if (input.getTipo().equalsIgnoreCase("nao-industrializado")) {
 				item = new ProdutoNaoIndustrializado(input.getNome(), Categoria.fromName(input.getCategoria()));
-			}else if(input.getTipo().equalsIgnoreCase("quantidade-fixa")) {
-				item =  new ProdutoQuantidadeFixa(input.getNome(), Categoria.fromName(input.getCategoria()));
-			}else if(item == null) {
+			} else if (input.getTipo().equalsIgnoreCase("quantidade-fixa")) {
+				item = new ProdutoQuantidadeFixa(input.getNome(), Categoria.fromName(input.getCategoria()));
+			} else if (item == null) {
 				throw new MappingException("Erro ao converter item, verifique o tipo");
 			}
-			
+
 			return item;
 		}
-	
+
 	};
-	
-	
+
 	public ItemIO() {
 		this.modelMapper = new ModelMapper();
 		this.modelMapper.addConverter(itemInputConverter);
 	}
-	
+
 }
