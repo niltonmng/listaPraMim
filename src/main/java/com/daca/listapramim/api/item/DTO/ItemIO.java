@@ -39,4 +39,10 @@ public class ItemIO {
 	
 	};
 	
+	
+	public ItemIO() {
+		this.modelMapper = new ModelMapper();
+		this.modelMapper.addConverter(itemInputConverter);
+	}
+	
 }
