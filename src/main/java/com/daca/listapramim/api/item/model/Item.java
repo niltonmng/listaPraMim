@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 @Entity
 @Inheritance
-@Table(name = "tb_item")
+@Table(name = "tb_item",
+		uniqueConstraints = @UniqueConstraint(columnNames={"nome", "categoria"}))
 public abstract class Item implements Serializable, Model<Long>{
 
 	private static final long serialVersionUID = 1L;

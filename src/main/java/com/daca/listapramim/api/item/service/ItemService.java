@@ -6,6 +6,8 @@ import com.daca.listapramim.api.utils.GenericService;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -22,7 +24,11 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 	}
 
 	public void create(Item item) {
-		this.itemRepository.save(item);
+		try {
+			this.itemRepository.save(item);
+		}catch (ConstraintViolationException e){
+			throw new RuntimeException("Item já existente"+ e.getMessage());
+		}
 	}
 
 	public Item show(Long id){
