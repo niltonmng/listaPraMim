@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,12 +35,12 @@ public class ItemController {
 
     @PostMapping({"/",""})
     @ApiOperation(value = "Create Item")
-    public ResponseEntity<?> create(@Valid @RequestBody ItemInput itemInput){
+    public ResponseEntity create(@Valid @RequestBody ItemInput itemInput){
         LOGGER.info("Criando Item");
         Item item = this.itemIO.mapTo(itemInput);
         this.itemService.create(item);
         LOGGER.info("Item criado");
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
     
