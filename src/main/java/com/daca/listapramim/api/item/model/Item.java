@@ -22,8 +22,8 @@ public abstract class Item implements Serializable, Model<Long>{
 	@NotEmpty
 	@Column(name = "nome", nullable = false)
 	private String nome;
-	
-	@NotNull
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "categoria", nullable = false)
 	private Categoria categoria;
 	
