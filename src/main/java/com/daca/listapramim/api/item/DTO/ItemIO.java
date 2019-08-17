@@ -44,4 +44,8 @@ public class ItemIO {
 		this.modelMapper.addConverter(itemInputConverter);
 	}
 
+	public Item mapTo(ItemInput itemInput){
+		return this.modelMapper.map(itemInput, Item.class);
+	}
+
 }

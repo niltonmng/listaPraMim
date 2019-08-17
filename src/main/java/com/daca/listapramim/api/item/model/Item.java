@@ -6,10 +6,15 @@ import javax.validation.constraints.NotNull;
 
 import com.daca.listapramim.api.utils.Model;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name="tb_item")
-public abstract class Item implements Model<Long>{
-	
+@Inheritance
+@Table(name = "tb_item")
+public abstract class Item implements Serializable, Model<Long>{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

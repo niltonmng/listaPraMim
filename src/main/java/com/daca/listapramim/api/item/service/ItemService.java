@@ -4,9 +4,11 @@ import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.utils.GenericService;
 import javassist.NotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ItemService extends GenericService<Long, Item, ItemRepository> {
 
 	private ItemRepository itemRepository;
