@@ -39,13 +39,33 @@ public class ItemIO {
 
 	};
 
+	final Converter<Item, ItemOutput> itemOutputConverter = new Converter<Item, ItemOutput>(){
+
+		@Override
+		public ItemOutput convert(MappingContext<Item, ItemOutput> context){
+			Item item = context.getSource();
+			ItemOutput itemOutput = new ItemOutput();
+
+			itemOutput.setCategoria(item.getCategoria().getName());
+			itemOutput.setId(item.getId());
+			itemOutput.setNome(item.getNome());
+			itemOutput.setTipo(item.getClass().getSimpleName());
+			return itemOutput;
+		}
+	};
+
 	public ItemIO() {
 		this.modelMapper = new ModelMapper();
 		this.modelMapper.addConverter(itemInputConverter);
+		this.modelMapper.addConverter(itemOutputConverter);
 	}
 
 	public Item mapTo(ItemInput itemInput){
 		return this.modelMapper.map(itemInput, Item.class);
+	}
+
+	public ItemOutput mapTo(Item item){
+		return this.modelMapper.map(item, ItemOutput.class);
 	}
 
 }
