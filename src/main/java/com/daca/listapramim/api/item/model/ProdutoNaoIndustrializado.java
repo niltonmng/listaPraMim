@@ -10,4 +10,12 @@ public class ProdutoNaoIndustrializado extends Item {
 	public ProdutoNaoIndustrializado(String nome, Categoria categoria) {
 		super(nome, categoria);
 	}
+
+	public ProdutoNaoIndustrializado(){}
+
+	@Override
+	public String toString() {
+		return "Não Industrializado";
+	}
+
 }

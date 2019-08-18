@@ -2,8 +2,11 @@ package com.daca.listapramim.api.item.DTO;
 
 import javax.validation.constraints.NotEmpty;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.stereotype.Component;
 
+@ApiModel(value = "itemInput")
 public class ItemInput {
 	
 	

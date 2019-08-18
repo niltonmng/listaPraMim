@@ -2,6 +2,7 @@ package com.daca.listapramim.api.item.controller;
 
 import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemInput;
+import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.service.ItemService;
 import io.swagger.annotations.Api;
@@ -42,6 +43,13 @@ public class ItemController {
         LOGGER.info("Item criado");
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
+    }
+
+    @ApiOperation(value =  "Get a Item")
+    @GetMapping({"/{id}/", "/{id}"})
+    public ItemOutput show(@PathVariable("id") Long id){
+        LOGGER.info("Show item by id " +id);
+        return this.itemIO.mapTo(this.itemService.show(id));
     }
     
     

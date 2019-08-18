@@ -33,7 +33,10 @@ public abstract class Item implements Serializable, Model<Long>{
 		this.nome = nome;
 		this.categoria = categoria;
 	}
-	
+
+	public Item() {
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -97,10 +100,10 @@ public abstract class Item implements Serializable, Model<Long>{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Item";
+	}
 }

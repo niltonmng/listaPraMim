@@ -35,7 +35,8 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 		if(!this.itemRepository.existsById(id)){
 			throw new RuntimeException("ID não relacionado a nenhum item");
 		}
-		return this.itemRepository.findById(id).orElseThrow(RuntimeException::new);
+		Item item = this.itemRepository.findById(id).orElseThrow(RuntimeException::new);
+		return item;
 	}
 
 	public Item update(Long id, Item item){

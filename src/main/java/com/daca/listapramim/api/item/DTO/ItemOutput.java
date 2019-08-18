@@ -1,9 +1,12 @@
 package com.daca.listapramim.api.item.DTO;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotEmpty;
 
+@ApiModel(value = "itemOutput")
 public class ItemOutput {
 
     @ApiModelProperty(example = "1")
@@ -19,6 +22,13 @@ public class ItemOutput {
     private String tipo;
 
     public ItemOutput() {
+    }
+
+    public ItemOutput(Long id, String nome, String categoria, String tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.tipo = tipo;
     }
 
     public Long getId() {
