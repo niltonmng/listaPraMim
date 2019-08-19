@@ -12,6 +12,9 @@ import com.daca.listapramim.api.item.model.ProdutoNaoIndustrializado;
 import com.daca.listapramim.api.item.model.ProdutoQuantidadeFixa;
 import com.daca.listapramim.api.item.model.ProdutoUnidade;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 @Component("itemIO")
 public class ItemIO {
 
@@ -94,6 +97,10 @@ public class ItemIO {
 	public ItemOutput mapTo(Item item){
 		return modelMapper.map(item, ItemOutput.class);
 	}
+
+	public List<ItemOutput> toList(List<Item> itens, Type type){
+	    return this.modelMapper.map(itens, type);
+    }
 
 
 }
