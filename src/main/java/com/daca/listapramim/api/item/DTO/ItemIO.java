@@ -99,8 +99,8 @@ public class ItemIO {
 	}
 
 	public List<ItemOutput> toList(List<Item> itens, Type type){
-	    return this.modelMapper.map(itens, type);
-    }
+		return this.modelMapper.map(itens, type);
+	}
 
 
 }

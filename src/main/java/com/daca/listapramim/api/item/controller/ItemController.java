@@ -4,7 +4,6 @@ import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemInput;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.model.ProdutoUnidade;
 import com.daca.listapramim.api.item.service.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,7 +11,6 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +24,9 @@ import java.util.List;
 @RequestMapping("/api/item")
 @Api(tags = "Item")
 @CrossOrigin
-public class ItemController {
+public abstract class ItemController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class.getSimpleName());
-
     private ItemIO itemIO;
     private ItemService itemService;
 
@@ -46,11 +43,11 @@ public class ItemController {
         Item item = this.itemIO.mapTo(itemInput);
         this.itemService.create(item);
         LOGGER.info("Item criado");
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.noContent().build();
 
     }
 
-    @ApiOperation(value =  "Get a Item")
+    @ApiOperation(value = "Get a Item")
     @GetMapping({"/{id}/", "/{id}"})
     public ItemOutput show(@PathVariable("id") Long id){
         LOGGER.info("Show item by id " +id);

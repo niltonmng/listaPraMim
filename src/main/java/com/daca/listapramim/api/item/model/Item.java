@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.daca.listapramim.api.utils.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Inheritance
@@ -28,11 +29,14 @@ public abstract class Item implements Serializable, Model<Long>{
 	@Column(name = "categoria", nullable = false)
 	private Categoria categoria;
 	
-	
 	public Item(String nome, Categoria categoria) {
 		this.nome = nome;
 		this.categoria = categoria;
 	}
+
+    public Item(Long id){
+	    this.id = id;
+    }
 
 	public Item() {
 	}

@@ -59,18 +59,24 @@ public class SwaggerConfiguration {
 	public Docket api() {
 		final String REJECT_SLASH_AT_END = "/api.*[^//]$";
 		return new Docket(DocumentationType.SWAGGER_2)
-				.ignoredParameterTypes(ApiIgnore.class)
 				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.regex(REJECT_SLASH_AT_END))
+				.apis(RequestHandlerSelectors.basePackage("com.daca.listapramim.api"))
+				.paths(PathSelectors.any())
 				.build()
-				.pathMapping("/")
-				.securitySchemes(Arrays.asList(apiKey()))
-				.securityContexts(Arrays.asList(securityContext()))
-				.produces(DEFAULT_PRODUCES_AND_CONSUMES)
-				.consumes(DEFAULT_PRODUCES_AND_CONSUMES)
 				.apiInfo(DEFAULT_API_INFO);
 	}
 
+	@Bean
+	public SecurityConfiguration security() {
+		return SecurityConfigurationBuilder.builder()
+//				.clientId(clientId)
+//				.clientSecret(clientSecret)
+				.realm("realm")
+				.appName("lista-pra-mim-manager")
+				.scopeSeparator(",")
+				.additionalQueryStringParams(null)
+				.useBasicAuthenticationWithAccessCodeGrant(false)
+				.build();
+	}
 
 }
