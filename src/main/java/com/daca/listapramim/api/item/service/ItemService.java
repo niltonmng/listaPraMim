@@ -4,6 +4,7 @@ import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.utils.GenericService;
 import javassist.NotFoundException;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
@@ -31,12 +32,18 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 		}
 	}
 
+	@ReadOnlyProperty
 	public Item show(Long id){
 		if(!this.itemRepository.existsById(id)){
 			throw new RuntimeException("ID não relacionado a nenhum item");
 		}
-		Item item = this.itemRepository.findById(id).orElseThrow(RuntimeException::new);
-		return item;
+		try{
+			Item item = this.itemRepository.findById(id).orElseThrow(RuntimeException::new);
+			System.out.println(item);
+			return item;
+		}catch (IllegalArgumentException iae){
+			throw new RuntimeException("");
+		}
 	}
 
 	public Item update(Long id, Item item){

@@ -17,6 +17,17 @@ public class ItemIO {
 
 	private ModelMapper modelMapper;
 
+	final Converter<Item, ItemOutput> itemOutputConverter = new Converter<Item, ItemOutput>() {
+
+		@Override
+		public ItemOutput convert(MappingContext<Item, ItemOutput> context){
+			Item item = context.getSource();
+
+			return toItemOutput(item);
+		}
+	};
+
+
 	final Converter<ItemInput, Item> itemInputConverter = new Converter<ItemInput, Item>() {
 
 		@Override
@@ -40,21 +51,10 @@ public class ItemIO {
 
 	};
 
-	final Converter<Item, ItemOutput> itemOutputConverter = new Converter<Item, ItemOutput>() {
-
-		@Override
-		public ItemOutput convert(MappingContext<Item, ItemOutput> context){
-			Item item = context.getSource();
-
-			return toItemOutput(item);
-		}
-	};
-
 	public ItemIO() {
 		this.modelMapper = new ModelMapper();
 		this.modelMapper.addConverter(itemInputConverter);
 		this.modelMapper.addConverter(itemOutputConverter);
-
 	}
 
 	private ItemOutput toItemOutput(Item item){
@@ -70,7 +70,7 @@ public class ItemIO {
 	}
 
 	public ItemOutput mapTo(Item item){
-		return this.modelMapper.map(item, ItemOutput.class);
+		return modelMapper.map(item, ItemOutput.class);
 	}
 
 

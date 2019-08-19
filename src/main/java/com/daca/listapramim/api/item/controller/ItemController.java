@@ -49,7 +49,8 @@ public class ItemController {
     @GetMapping({"/{id}/", "/{id}"})
     public ItemOutput show(@PathVariable("id") Long id){
         LOGGER.info("Show item by id " +id);
-        return this.itemIO.mapTo(this.itemService.show(id));
+        Item item = this.itemService.show(id);
+        return this.itemIO.mapTo(item);
     }
     
     
