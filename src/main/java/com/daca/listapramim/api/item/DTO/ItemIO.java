@@ -17,15 +17,35 @@ public class ItemIO {
 
 	private ModelMapper modelMapper;
 
-	final Converter<Item, ItemOutput> itemOutputConverter = new Converter<Item, ItemOutput>() {
+	final Converter<ProdutoUnidade, ItemOutput> itemOutputConverter = new Converter<ProdutoUnidade, ItemOutput>() {
 
 		@Override
-		public ItemOutput convert(MappingContext<Item, ItemOutput> context){
+		public ItemOutput convert(MappingContext<ProdutoUnidade, ItemOutput> context){
 			Item item = context.getSource();
 
 			return toItemOutput(item);
 		}
 	};
+
+    final Converter<ProdutoQuantidadeFixa, ItemOutput> itemOutputConverter2 = new Converter<ProdutoQuantidadeFixa, ItemOutput>() {
+
+        @Override
+        public ItemOutput convert(MappingContext<ProdutoQuantidadeFixa, ItemOutput> context){
+            Item item = context.getSource();
+
+            return toItemOutput(item);
+        }
+    };
+
+    final Converter<ProdutoNaoIndustrializado, ItemOutput> itemOutputConverter3 = new Converter<ProdutoNaoIndustrializado, ItemOutput>() {
+
+        @Override
+        public ItemOutput convert(MappingContext<ProdutoNaoIndustrializado, ItemOutput> context){
+            Item item = context.getSource();
+
+            return toItemOutput(item);
+        }
+    };
 
 
 	final Converter<ItemInput, Item> itemInputConverter = new Converter<ItemInput, Item>() {
@@ -55,6 +75,8 @@ public class ItemIO {
 		this.modelMapper = new ModelMapper();
 		this.modelMapper.addConverter(itemInputConverter);
 		this.modelMapper.addConverter(itemOutputConverter);
+        this.modelMapper.addConverter(itemOutputConverter2);
+        this.modelMapper.addConverter(itemOutputConverter3);
 	}
 
 	private ItemOutput toItemOutput(Item item){
@@ -62,7 +84,7 @@ public class ItemIO {
 		itemOutput.setCategoria(item.getCategoria().getName());
 		itemOutput.setId(item.getId());
 		itemOutput.setNome(item.getNome());
-		itemOutput.setTipo("unidade");
+		itemOutput.setTipo(item.toString());
 		return itemOutput;
 	}
 	public Item mapTo(ItemInput itemInput){

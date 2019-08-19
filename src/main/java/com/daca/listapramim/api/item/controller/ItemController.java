@@ -4,6 +4,7 @@ import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemInput;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.item.model.Item;
+import com.daca.listapramim.api.item.model.ProdutoUnidade;
 import com.daca.listapramim.api.item.service.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
