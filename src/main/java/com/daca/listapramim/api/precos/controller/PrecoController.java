@@ -21,7 +21,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item/{itemId}/preco")
+@RequestMapping("/api/preco")
 @Api(tags = "Preco")
 @CrossOrigin
 public class PrecoController {
@@ -47,11 +47,14 @@ public class PrecoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value =  "Get all Precos")
-    @GetMapping({"/{id}/", "/{id}"})
-    public List<PrecoOutput> index(@PathVariable("id") Long id){
+    @ApiOperation(value =  "Get all Precos By Item")
+    @GetMapping({"/{itemId}/", "/{itemId}"})
+    public List<PrecoOutput> indexByItemId(@PathVariable("itemId") Long itemId){
         LOGGER.info("Index Preco");
         Type type = new TypeToken<List<PrecoOutput>>() {}.getType();
-        return this.precoIO.toList(this.precoService.getByItemId(id), type);
+        return this.precoIO.toList(this.precoService.getByItemId(itemId), type);
     }
+
+
+
 }
