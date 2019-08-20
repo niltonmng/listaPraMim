@@ -1,7 +1,7 @@
-package com.daca.listapramim.api.mapaDePrecos.DTO;
+package com.daca.listapramim.api.precos.DTO;
 
 import com.daca.listapramim.api.item.service.ItemService;
-import com.daca.listapramim.api.mapaDePrecos.model.MapaDePreco;
+import com.daca.listapramim.api.precos.model.MapaDePreco;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
@@ -33,7 +33,7 @@ public class PrecoIO {
 
             preco.setItem(itemService.show(precoInput.getItemId()));
             preco.setLocal(precoInput.getLocal());
-            precoInput.setPreco(precoInput.getPreco());
+            preco.setPreco(precoInput.getPreco());
             return preco;
         }
     };
@@ -48,7 +48,7 @@ public class PrecoIO {
             precoOutput.setLocal(preco.getLocal());
             precoOutput.setItemId(preco.getItem().getId());
             precoOutput.setPreco(preco.getPreco());
-            return null;
+            return precoOutput;
         }
     };
 

@@ -1,10 +1,11 @@
-package com.daca.listapramim.api.mapaDePrecos.model;
+package com.daca.listapramim.api.precos.model;
 
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.utils.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -21,7 +22,7 @@ public class MapaDePreco implements Serializable, Model<Long> {
     @Column(name = "local")
     private String local;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "preco")
     private BigDecimal preco;
 

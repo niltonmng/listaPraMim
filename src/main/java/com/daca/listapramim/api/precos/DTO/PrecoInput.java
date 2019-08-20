@@ -1,13 +1,10 @@
-package com.daca.listapramim.api.mapaDePrecos.DTO;
+package com.daca.listapramim.api.precos.DTO;
 
-import com.daca.listapramim.api.item.model.Item;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @ApiModel(value = "precoInput")
@@ -19,11 +16,11 @@ public class PrecoInput {
     private String local;
 
     @ApiModelProperty(example = "2.33")
-    @NotEmpty
+    @NotNull
     private BigDecimal preco;
 
     @ApiModelProperty(example = "1")
-    @NotEmpty
+    @NotNull
     private Long itemId;
 
     public PrecoInput() {

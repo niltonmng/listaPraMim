@@ -1,4 +1,4 @@
-package com.daca.listapramim.api.mapaDePrecos.DTO;
+package com.daca.listapramim.api.precos.DTO;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
