@@ -1,7 +1,10 @@
 package com.daca.listapramim.api.item.DTO;
 
+import com.daca.listapramim.api.precos.DTO.PrecoOutput;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 @ApiModel(value = "itemOutput")
 public class ItemOutput {
@@ -17,6 +20,8 @@ public class ItemOutput {
 
     @ApiModelProperty(example = "unidade")
     private String tipo;
+
+    private List<PrecoOutput> precos;
 
     public ItemOutput() {
     }
@@ -58,5 +63,13 @@ public class ItemOutput {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public List<PrecoOutput> getPrecos() {
+        return precos;
+    }
+
+    public void setPrecos(List<PrecoOutput> precos) {
+        this.precos = precos;
     }
 }

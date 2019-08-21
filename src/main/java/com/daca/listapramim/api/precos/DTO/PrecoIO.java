@@ -30,7 +30,6 @@ public class PrecoIO {
         public MapaDePreco convert(MappingContext<PrecoInput, MapaDePreco> context) {
             PrecoInput precoInput = context.getSource();
             MapaDePreco preco = new MapaDePreco();
-
             preco.setItem(itemService.show(precoInput.getItemId()));
             preco.setLocal(precoInput.getLocal());
             preco.setPreco(precoInput.getPreco());
@@ -48,6 +47,7 @@ public class PrecoIO {
             precoOutput.setLocal(preco.getLocal());
             precoOutput.setItemId(preco.getItem().getId());
             precoOutput.setPreco(preco.getPreco());
+            precoOutput.setId(preco.getId());
             return precoOutput;
         }
     };

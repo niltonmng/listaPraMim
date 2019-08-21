@@ -1,9 +1,13 @@
 package com.daca.listapramim.api.item.DTO;
 
+import com.daca.listapramim.api.precos.DTO.PrecoIO;
+import com.daca.listapramim.api.precos.DTO.PrecoOutput;
 import org.hibernate.MappingException;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.modelmapper.spi.MappingContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.daca.listapramim.api.item.model.Categoria;
@@ -19,6 +23,8 @@ import java.util.List;
 public class ItemIO {
 
 	private ModelMapper modelMapper;
+	@Autowired
+	private PrecoIO precoIO;
 
 	final Converter<ProdutoUnidade, ItemOutput> itemOutputConverter = new Converter<ProdutoUnidade, ItemOutput>() {
 
@@ -88,6 +94,8 @@ public class ItemIO {
 		itemOutput.setId(item.getId());
 		itemOutput.setNome(item.getNome());
 		itemOutput.setTipo(item.toString());
+		Type type = new TypeToken<List<PrecoOutput>>() {}.getType();
+		itemOutput.setPrecos(this.precoIO.toList(item.getPrecos(), type));
 		return itemOutput;
 	}
 	public Item mapTo(ItemInput itemInput){

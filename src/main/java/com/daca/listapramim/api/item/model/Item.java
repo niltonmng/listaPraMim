@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
+import com.daca.listapramim.api.precos.model.MapaDePreco;
 import com.daca.listapramim.api.utils.Model;
 
 import java.io.Serializable;
@@ -28,6 +30,13 @@ public abstract class Item implements Serializable, Model<Long>{
 	@Enumerated(EnumType.STRING)
 	@Column(name = "categoria", nullable = false)
 	private Categoria categoria;
+
+	@ManyToMany(mappedBy = "itens",fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+	private List<ListaDeCompra> lista;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+    private List<MapaDePreco> precos;
 	
 	public Item(String nome, Categoria categoria) {
 		this.nome = nome;
@@ -75,9 +84,23 @@ public abstract class Item implements Serializable, Model<Long>{
 		this.categoria = categoria;
 	}
 
+    public List<ListaDeCompra> getLista() {
+        return lista;
+    }
 
+    public void setLista(List<ListaDeCompra> lista) {
+        this.lista = lista;
+    }
 
-	@Override
+    public List<MapaDePreco> getPrecos() {
+        return precos;
+    }
+
+    public void setPrecos(List<MapaDePreco> precos) {
+        this.precos = precos;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

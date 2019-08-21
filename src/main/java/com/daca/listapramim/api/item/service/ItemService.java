@@ -1,10 +1,13 @@
 package com.daca.listapramim.api.item.service;
 
+import com.daca.listapramim.api.item.model.Categoria;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.utils.GenericService;
 import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
@@ -14,6 +17,7 @@ import java.util.List;
 @Service
 public class ItemService extends GenericService<Long, Item, ItemRepository> {
 
+	@Autowired
 	private ItemRepository itemRepository;
 
 	public ItemService(ItemRepository itemRepository) {
@@ -22,6 +26,21 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 	
 	public List<Item> index(){
 		return this.itemRepository.findAll();
+	}
+
+	public List<Item> indexByOrderName(){
+	    return this.itemRepository.findAllByOrderByNome();
+    }
+
+    public List<Item> indexByOrderCategory(String categoria){
+		Categoria cat = Categoria.fromName(categoria);
+		Sort sort = new Sort(Sort.Direction.ASC, "nome");
+		List<Item> itens = this.itemRepository.findAllByCategoria(cat, sort);
+	    return itens;
+    }
+
+    public List<Item> indexFilterByName(String nome){
+		return this.itemRepository.findAllByNomeContainingIgnoreCase(nome);
 	}
 
 	public void create(Item item) {
@@ -39,7 +58,6 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 		}
 		try{
 			Item item = this.itemRepository.findById(id).orElseThrow(RuntimeException::new);
-			System.out.println(item);
 			return item;
 		}catch (IllegalArgumentException iae){
 			throw new RuntimeException("");

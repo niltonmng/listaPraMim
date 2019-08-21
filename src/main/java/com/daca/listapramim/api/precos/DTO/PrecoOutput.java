@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 @ApiModel(value = "precoOutput")
 public class PrecoOutput {
 
+    @ApiModelProperty(example = "1")
+    private Long id;
+
     @ApiModelProperty(example = "Supermercado BaratoD+", required = true)
     @NotEmpty
     private String local;
@@ -47,5 +50,13 @@ public class PrecoOutput {
 
     public void setItemId(Long itemId) {
         this.itemId = itemId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -20,6 +20,7 @@ public enum Categoria {
 			if (categoria.name.equalsIgnoreCase(name))
 				return categoria;
 		}
+
 		throw new RuntimeException("Categoria " + name + " não existe");
 	}
 

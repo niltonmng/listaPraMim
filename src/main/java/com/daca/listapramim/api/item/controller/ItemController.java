@@ -3,9 +3,12 @@ package com.daca.listapramim.api.item.controller;
 import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemInput;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
+import com.daca.listapramim.api.item.model.Categoria;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.model.ProdutoUnidade;
 import com.daca.listapramim.api.item.service.ItemService;
+import com.daca.listapramim.api.precos.DTO.PrecoIO;
+import com.daca.listapramim.api.precos.DTO.PrecoOutput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.TypeToken;
@@ -31,12 +34,14 @@ public class ItemController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class.getSimpleName());
 
     private ItemIO itemIO;
+    private PrecoIO precoIO;
     private ItemService itemService;
 
     @Autowired
-    public ItemController(ItemIO itemIO, ItemService itemService) {
+    public ItemController(ItemIO itemIO, ItemService itemService, PrecoIO precoIO) {
         this.itemIO = itemIO;
         this.itemService = itemService;
+        this.precoIO = precoIO;
     }
 
     @PostMapping({"/",""})
@@ -55,7 +60,8 @@ public class ItemController {
     public ItemOutput show(@PathVariable("id") Long id){
         LOGGER.info("Show item by id " +id);
         Item item = this.itemService.show(id);
-        return this.itemIO.mapTo(item);
+        ItemOutput output =this.itemIO.mapTo(item);
+        return output;
     }
 
     @ApiOperation(value =  "Get all Item")
@@ -84,6 +90,33 @@ public class ItemController {
         this.itemService.delete(id);
         LOGGER.info("Item com id "+id+" excluído");
         return ResponseEntity.ok().build();
+    }
+
+
+    //Endpoints da ordenação
+
+    @ApiOperation(value = "Get Order items by name")
+    @GetMapping({"/order/name/","/order/name"})
+    public List<ItemOutput> indexOrderByName(){
+        LOGGER.info("Index Order Itens");
+        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
+        return this.itemIO.toList(this.itemService.indexByOrderName(), type);
+    }
+
+    @ApiOperation(value = "Get Order items by category")
+    @GetMapping({"/order/categoria/{categoria}/","/order/categoria/{categoria}"})
+    public List<ItemOutput> indexOrderByCategoria(@PathVariable("categoria") String categoria){
+        LOGGER.info("Index Order Itens");
+        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
+        return this.itemIO.toList(this.itemService.indexByOrderCategory(categoria), type);
+    }
+
+    @ApiOperation(value="Get filter Items by name")
+    @GetMapping({"/order/filter/{nome}/","/order/filter/{nome}"})
+    public List<ItemOutput> indexFilterItemsByName(@PathVariable("nome") String nome){
+        LOGGER.info("Index Filtered items by name");
+        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
+        return this.itemIO.toList(this.itemService.indexFilterByName(nome), type);
     }
 
 
