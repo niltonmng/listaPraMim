@@ -15,6 +15,7 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,6 +114,22 @@ public class ListaController {
         this.listaService.delete(id);
         LOGGER.info("Lista de compras com id "+id+" excluído");
         return ResponseEntity.ok().build();
+    }
+
+    @ApiOperation(value = "add Item in Lista De Compras")
+    @PutMapping({"/{id}/itens/{itemId}/","/{id}/itens/{itemId}"})
+    public ResponseEntity<?> addItem(@Min(value = 1) @PathVariable("id") Long id,
+                                     @Min(value = 1) @PathVariable("itemId") Long itemId){
+        ListaDeCompra listaDeCompra = this.listaService.show(id);
+        Item item = this.itemService.show(itemId);
+        if(listaDeCompra.getItens().contains(item)){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        listaDeCompra.getItens().add(item);
+        listaDeCompra.setUpdatedAt(LocalDateTime.now());
+        this.listaService.update(id, listaDeCompra);
+        LOGGER.info("Item com id "+id+" adicionado a Lista de compras com id "+id);
+        return ResponseEntity.noContent().build();
     }
 
 

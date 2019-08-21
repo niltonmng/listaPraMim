@@ -10,7 +10,6 @@ import java.util.List;
 public class ListaInput {
 
     @ApiModelProperty(example = "[1]")
-    @NotEmpty
     private List<Long> itens;
 
     @ApiModelProperty(example = "feira 23/05/2017", required = true)

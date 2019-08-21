@@ -48,8 +48,7 @@ public class ListaIO {
 
             output.setDescricao(lista.getDescricao());
             output.setId(lista.getId());
-            Type type = new TypeToken<List<ItemOutput>>() {
-            }.getType();
+            Type type = new TypeToken<List<ItemOutput>>() {}.getType();
             output.setItens(itemIO.toList(lista.getItens(), type));
             output.setCreatedAt(lista.getCreatedAt());
             output.setUpdatedAt(lista.getUpdatedAt());
@@ -57,15 +56,14 @@ public class ListaIO {
         }
     };
 
-    public ListaDeCompra mapTo(ListaInput listaInput) {
+    public ListaDeCompra mapTo(ListaInput listaInput){
         return this.modelMapper.map(listaInput, ListaDeCompra.class);
     }
-
-    public ListaOutput mapTo(ListaDeCompra listaDeCompra) {
+    public ListaOutput mapTo(ListaDeCompra listaDeCompra){
         return this.modelMapper.map(listaDeCompra, ListaOutput.class);
     }
 
-    public List<ListaOutput> toList(List<ListaDeCompra> lista, Type type) {
+    public List<ListaOutput> toList(List<ListaDeCompra> lista, Type type){
         return this.modelMapper.map(lista, type);
     }
 }
