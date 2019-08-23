@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.daca.listapramim.api.compra.model.Compra;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
 import com.daca.listapramim.api.precos.model.MapaDePreco;
 import com.daca.listapramim.api.utils.Model;
@@ -31,13 +32,14 @@ public abstract class Item implements Serializable, Model<Long>{
 	@Column(name = "categoria", nullable = false)
 	private Categoria categoria;
 
-	@ManyToMany(mappedBy = "itens",fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
-	private List<ListaDeCompra> lista;
-
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
     private List<MapaDePreco> precos;
-	
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+    private List<Compra> compras;
+
 	public Item(String nome, Categoria categoria) {
 		this.nome = nome;
 		this.categoria = categoria;
@@ -84,12 +86,12 @@ public abstract class Item implements Serializable, Model<Long>{
 		this.categoria = categoria;
 	}
 
-    public List<ListaDeCompra> getLista() {
-        return lista;
+    public List<Compra> getCompras() {
+        return compras;
     }
 
-    public void setLista(List<ListaDeCompra> lista) {
-        this.lista = lista;
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
     }
 
     public List<MapaDePreco> getPrecos() {

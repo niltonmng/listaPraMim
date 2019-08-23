@@ -4,6 +4,7 @@ import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.service.ItemService;
+import com.daca.listapramim.api.listaDeCompras.DTO.EstrategiaInput;
 import com.daca.listapramim.api.listaDeCompras.DTO.ListaIO;
 import com.daca.listapramim.api.listaDeCompras.DTO.ListaInput;
 import com.daca.listapramim.api.listaDeCompras.DTO.ListaOutput;
@@ -45,91 +46,83 @@ public class ListaController {
     @Autowired
     private ItemIO itemIO;
 
-    @PostMapping({"/",""})
+    @PostMapping({"/", ""})
     @ApiOperation(value = "Create Lista De Compras")
-    public ResponseEntity create(@Valid @RequestBody ListaInput listaInput){
+    public ResponseEntity create(@Valid @RequestBody ListaInput listaInput) {
         LOGGER.info("Criando Lista de Compras");
         ListaDeCompra listaDeCompra = this.listaIO.mapTo(listaInput);
-        List<Long> ids = listaInput.getItens();
-        List<Item> itens = new ArrayList<Item>();
-        for (Long id: ids) {
-            itens.add(this.itemService.show(id));
-        }
-        listaDeCompra.setItens(itens);
         listaDeCompra.setCreatedAt(LocalDateTime.now());
         this.listaService.create(listaDeCompra);
         LOGGER.info("Lista de Compras criada");
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping({"/{id}/itens/","{id}/itens"})
-    @ApiOperation(value = "Get Itens From Lista de Compras")
-    public List<ItemOutput> getItensLista(@Min(value = 1) @PathVariable("id") Long id){
-        ListaDeCompra lista = this.listaService.show(id);
-        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-        LOGGER.info("Get itens da lista de compras com id "+ id);
-        return this.itemIO.toList(lista.getItens(), type);
-    }
-
-    @GetMapping({"/{id}/","/{id}"})
+    @GetMapping({"/{id}/", "/{id}"})
     @ApiOperation(value = "Get A Listas De Compras")
-    public ListaOutput show(@Min(value = 1) @PathVariable("id") Long id){
+    public ListaOutput show(@Min(value = 1) @PathVariable("id") Long id) {
         ListaDeCompra lista = this.listaService.show(id);
-        LOGGER.info("Show Lista de compras com id "+ id);
+        LOGGER.info("Show Lista de compras com id " + id);
         return this.listaIO.mapTo(lista);
     }
 
-    @GetMapping({"/",""})
+    @GetMapping({"/", ""})
     @ApiOperation(value = "Get All Listas De Compras")
-    public List<ListaOutput> index(){
+    public List<ListaOutput> index() {
         List<ListaDeCompra> listas = this.listaService.index();
-        Type type = new TypeToken<List<ListaOutput>>() {}.getType();
+        Type type = new TypeToken<List<ListaOutput>>() {
+        }.getType();
         LOGGER.info("Index Lista de compras");
         return this.listaIO.toList(listas, type);
     }
 
     @ApiOperation(value = "Update Lista De Compras")
-    @PutMapping({"/{id}/","/{id}"})
+    @PutMapping({"/{id}/", "/{id}"})
     public ResponseEntity<?> update(@Min(value = 1) @PathVariable("id") Long id,
-                                    @Valid @RequestBody ListaInput listaInput){
+                                    @Valid @RequestBody ListaInput listaInput) {
         ListaDeCompra lista = this.listaIO.mapTo(listaInput);
         LOGGER.info("Atualizando Lista de compras");
-        List<Long> ids = listaInput.getItens();
-        List<Item> itens = new ArrayList<Item>();
-        for (Long idItem: ids) {
-            itens.add(this.itemService.show(idItem));
-        }
-        lista.setItens(itens);
         lista.setUpdatedAt(LocalDateTime.now());
         this.listaService.update(id, lista);
-        LOGGER.info("Lista de compras com id "+id+" Atualizado");
+        LOGGER.info("Lista de compras com id " + id + " Atualizado");
         return ResponseEntity.noContent().build();
     }
 
 
     @ApiOperation(value = "Delete Lista De Compras")
-    @DeleteMapping({"/{id}/","/{id}"})
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        LOGGER.info("Excluindo lista de compras com id "+id);
+    @DeleteMapping({"/{id}/", "/{id}"})
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        LOGGER.info("Excluindo lista de compras com id " + id);
         this.listaService.delete(id);
-        LOGGER.info("Lista de compras com id "+id+" excluído");
+        LOGGER.info("Lista de compras com id " + id + " excluído");
         return ResponseEntity.ok().build();
     }
 
-    @ApiOperation(value = "add Item in Lista De Compras")
-    @PutMapping({"/{id}/itens/{itemId}/","/{id}/itens/{itemId}"})
-    public ResponseEntity<?> addItem(@Min(value = 1) @PathVariable("id") Long id,
-                                     @Min(value = 1) @PathVariable("itemId") Long itemId){
-        ListaDeCompra listaDeCompra = this.listaService.show(id);
-        Item item = this.itemService.show(itemId);
-        if(listaDeCompra.getItens().contains(item)){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        listaDeCompra.getItens().add(item);
-        listaDeCompra.setUpdatedAt(LocalDateTime.now());
-        this.listaService.update(id, listaDeCompra);
-        LOGGER.info("Item com id "+id+" adicionado a Lista de compras com id "+id);
-        return ResponseEntity.noContent().build();
+    @GetMapping({"/{id}/itens/", "{id}/itens"})
+    @ApiOperation(value = "Get Itens From Lista de Compras")
+    public List<ItemOutput> getItensLista(@Min(value = 1) @PathVariable("id") Long id) {
+        ListaDeCompra lista = this.listaService.show(id);
+        Type type = new TypeToken<List<ItemOutput>>() {
+        }.getType();
+        List<Item> itens = this.listaService.getAllItemsByLista(lista);
+        LOGGER.info("Get itens da lista de compras com id " + id);
+        return this.itemIO.toList(itens, type);
+    }
+
+    //Pesquisas Lista de compra
+
+    @GetMapping({"/descricao/{descricao}/", "/descricao/{descricao}"})
+    @ApiOperation(value = "Get A Listas De Compras By descricao")
+    public ListaOutput getListaByDescricao(@PathVariable("descricao") String descricao) {
+        return this.listaIO.mapTo(this.listaService.getByDescricao(descricao));
+    }
+
+    @PostMapping({"/generate/", "/generate"})
+    @ApiOperation(value = "Auto Generate Lista De Compras")
+    public ResponseEntity generateLista(EstrategiaInput input){
+        ListaDeCompra lista = this.listaIO.mapTo(input);
+        lista.setCreatedAt(LocalDateTime.now());
+        this.listaService.estrategia(input.getEstrategiaId(), lista, input.getItemId());
+        return ResponseEntity.ok().build();
     }
 
 

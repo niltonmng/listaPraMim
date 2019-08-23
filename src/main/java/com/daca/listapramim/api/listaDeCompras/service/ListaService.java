@@ -1,6 +1,9 @@
 package com.daca.listapramim.api.listaDeCompras.service;
 
+import com.daca.listapramim.api.compra.model.Compra;
+import com.daca.listapramim.api.compra.service.CompraService;
 import com.daca.listapramim.api.item.model.Item;
+import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
 import com.daca.listapramim.api.listaDeCompras.repository.ListaRepository;
 import com.daca.listapramim.api.utils.GenericService;
@@ -9,6 +12,8 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +21,9 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
 
     @Autowired
     private ListaRepository listaRepository;
+
+    @Autowired
+    private CompraService compraService;
 
     public List<ListaDeCompra> index(){
         return this.listaRepository.findAll();
@@ -29,9 +37,6 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         }
     }
 
-    public List<Item> getItens(ListaDeCompra listaDeCompra){
-        return listaDeCompra.getItens();
-    }
 
     @ReadOnlyProperty
     public ListaDeCompra show(Long id){
@@ -61,6 +66,41 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         this.listaRepository.deleteById(id);
     }
 
+    //Pesquisas da lista de compras
+    public List<ListaDeCompra> indexFilterByDescricao(String descricao){
+        return this.listaRepository.findAllByDescricaoContainingIgnoreCase(descricao);
+    }
 
+    public List<Item> getAllItemsByLista(ListaDeCompra lista){
+        List<Item> itens = new ArrayList<Item>();
+        for (Compra compra: lista.getCompras()) {
+            itens.add(compra.getItem());
+        }
+
+        return itens;
+    }
+
+    public ListaDeCompra getByDescricao(String descricao){
+        return this.listaRepository.findByDescricao(descricao);
+    }
+
+
+
+    public void estrategia(Long estrategia, ListaDeCompra lista, Long itemId){
+        ListaDeCompra oldLista = null;
+        if(estrategia == 1){
+            oldLista = this.listaRepository.ultimaLista();
+        }else if(estrategia == 2){
+            List<Compra> compras = this.compraService.getByItemId(itemId);
+            oldLista = compras.get(compras.size()-1).getListaDeCompra();
+        }
+
+        List<Compra> compras = new ArrayList<Compra>();
+        for (Compra compra: oldLista.getCompras()) {
+            compras.add(new Compra(compra.getItem(), lista, compra.getQtd()));
+        }
+        lista.setCompras(compras);
+        this.create(lista);
+    }
 
 }

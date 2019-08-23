@@ -63,4 +63,5 @@ public class PrecoIO {
     public List<PrecoOutput> toList(List<MapaDePreco> precos, Type type){
         return this.modelMapper.map(precos, type);
     }
+
 }
