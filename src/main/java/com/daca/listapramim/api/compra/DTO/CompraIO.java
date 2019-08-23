@@ -3,6 +3,7 @@ package com.daca.listapramim.api.compra.DTO;
 import com.daca.listapramim.api.compra.model.Compra;
 import com.daca.listapramim.api.item.service.ItemService;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
+import com.daca.listapramim.api.listaDeCompras.service.ListaService;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
@@ -20,6 +21,9 @@ public class CompraIO {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private ListaService listaService;
+
     public CompraIO(){
         this.modelMapper = new ModelMapper();
         this.modelMapper.addConverter(compraInputConverter);
@@ -31,7 +35,7 @@ public class CompraIO {
         public Compra convert(MappingContext<CompraInput, Compra> context) {
             CompraInput input = context.getSource();
             Compra compra = new Compra();
-            compra.setListaDeCompra(new ListaDeCompra(input.getListaId()));
+            compra.setListaDeCompra(listaService.show(input.getListaId()));
             compra.setQtd(input.getQtd());
             compra.setItem(itemService.show(input.getItemId()));
 

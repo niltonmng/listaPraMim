@@ -9,22 +9,11 @@ import java.util.List;
 @ApiModel(value = "listaInput")
 public class ListaInput {
 
-    @ApiModelProperty(example = "[1]")
-    private List<Long> compras;
-
     @ApiModelProperty(example = "feira 23/05/2017", required = true)
     @NotEmpty
     private String descricao;
 
     public ListaInput() {
-    }
-
-    public List<Long> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Long> compras) {
-        this.compras = compras;
     }
 
     public String getDescricao() {

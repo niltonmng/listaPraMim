@@ -20,13 +20,19 @@ public class Compra implements Serializable, Model<Long> {
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "listadecompra_id")
+    @JoinColumn(name = "listadecompra_id", nullable = false)
     private ListaDeCompra listaDeCompra;
 
     @Column(name = "qtd")
     private Double qtd;
 
     public Compra() {
+    }
+
+    public Compra(Item item, ListaDeCompra listaDeCompra, Double qtd) {
+        this.item = item;
+        this.listaDeCompra = listaDeCompra;
+        this.qtd = qtd;
     }
 
     public Long getId() {
