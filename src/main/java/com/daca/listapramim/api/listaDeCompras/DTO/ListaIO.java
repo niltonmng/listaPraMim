@@ -1,5 +1,6 @@
 package com.daca.listapramim.api.listaDeCompras.DTO;
 
+import com.daca.listapramim.api.compra.DTO.CompraIO;
 import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
@@ -20,7 +21,7 @@ public class ListaIO {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ItemIO itemIO;
+    private CompraIO compraIO;
 
 
     public ListaIO() {
@@ -49,7 +50,7 @@ public class ListaIO {
             output.setDescricao(lista.getDescricao());
             output.setId(lista.getId());
             Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-            output.setItens(itemIO.toList(lista.getItens(), type));
+            output.setCompras(compraIO.toList(lista.getCompras(), type));
             output.setCreatedAt(lista.getCreatedAt());
             output.setUpdatedAt(lista.getUpdatedAt());
             return output;

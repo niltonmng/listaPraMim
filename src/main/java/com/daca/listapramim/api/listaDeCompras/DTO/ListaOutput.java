@@ -1,5 +1,6 @@
 package com.daca.listapramim.api.listaDeCompras.DTO;
 
+import com.daca.listapramim.api.compra.DTO.CompraOutput;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.utils.AuditModel;
 import io.swagger.annotations.ApiModel;
@@ -16,7 +17,7 @@ public class ListaOutput extends AuditModel {
     @ApiModelProperty(example = "feira 23/05/2017")
     private String descricao;
 
-    private List<ItemOutput> itens;
+    private List<CompraOutput> compras;
 
     public Long getId() {
         return id;
@@ -34,11 +35,11 @@ public class ListaOutput extends AuditModel {
         this.descricao = descricao;
     }
 
-    public List<ItemOutput> getItens() {
-        return itens;
+    public List<CompraOutput> getCompras() {
+        return compras;
     }
 
-    public void setItens(List<ItemOutput> itens) {
-        this.itens = itens;
+    public void setCompras(List<CompraOutput> compras) {
+        this.compras = compras;
     }
 }

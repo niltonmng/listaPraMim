@@ -1,6 +1,7 @@
 package com.daca.listapramim.api.listaDeCompras.service;
 
 import com.daca.listapramim.api.item.model.Item;
+import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
 import com.daca.listapramim.api.listaDeCompras.repository.ListaRepository;
 import com.daca.listapramim.api.utils.GenericService;
@@ -9,6 +10,8 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,9 +32,6 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         }
     }
 
-    public List<Item> getItens(ListaDeCompra listaDeCompra){
-        return listaDeCompra.getItens();
-    }
 
     @ReadOnlyProperty
     public ListaDeCompra show(Long id){
@@ -61,6 +61,14 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         this.listaRepository.deleteById(id);
     }
 
+    //Pesquisas da lista de compras
+    public List<ListaDeCompra> indexFilterByDescricao(String descricao){
+        return this.listaRepository.findAllByDescricaoContainingIgnoreCase(descricao);
+    }
+
+    public ListaDeCompra getByDescricao(String descricao){
+        return this.listaRepository.findByDescricao(descricao);
+    }
 
 
 }

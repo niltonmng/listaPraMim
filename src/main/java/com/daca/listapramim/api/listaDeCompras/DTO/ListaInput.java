@@ -10,7 +10,7 @@ import java.util.List;
 public class ListaInput {
 
     @ApiModelProperty(example = "[1]")
-    private List<Long> itens;
+    private List<Long> compras;
 
     @ApiModelProperty(example = "feira 23/05/2017", required = true)
     @NotEmpty
@@ -19,12 +19,12 @@ public class ListaInput {
     public ListaInput() {
     }
 
-    public List<Long> getItens() {
-        return itens;
+    public List<Long> getCompras() {
+        return compras;
     }
 
-    public void setItens(List<Long> itens) {
-        this.itens = itens;
+    public void setCompras(List<Long> compras) {
+        this.compras = compras;
     }
 
     public String getDescricao() {

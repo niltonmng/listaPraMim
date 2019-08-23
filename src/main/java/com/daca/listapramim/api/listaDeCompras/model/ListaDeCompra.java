@@ -1,17 +1,19 @@
 package com.daca.listapramim.api.listaDeCompras.model;
 
+import com.daca.listapramim.api.compra.model.Compra;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.utils.AuditModel;
 import com.daca.listapramim.api.utils.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_lista",
         uniqueConstraints = @UniqueConstraint(columnNames={"descricao"}))
-public class ListaDeCompra extends AuditModel implements Model<Long>{
+public class ListaDeCompra extends AuditModel implements Serializable, Model<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +23,17 @@ public class ListaDeCompra extends AuditModel implements Model<Long>{
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "lista_itens",
-            joinColumns = @JoinColumn(name = "listadecompra_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private List<Item> itens;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "listadecompra_id")
+    private List<Compra> compras;
+
+    public ListaDeCompra(Long id) {
+        this.id = id;
+    }
+
+    public ListaDeCompra() {
+
+    }
 
     @Override
     public Long getId() {
@@ -46,11 +53,11 @@ public class ListaDeCompra extends AuditModel implements Model<Long>{
         this.descricao = descricao;
     }
 
-    public List<Item> getItens() {
-        return itens;
+    public List<Compra> getCompras() {
+        return compras;
     }
 
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
     }
 }
