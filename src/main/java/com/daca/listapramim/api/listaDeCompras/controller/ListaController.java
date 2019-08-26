@@ -1,15 +1,16 @@
 package com.daca.listapramim.api.listaDeCompras.controller;
 
+import com.daca.listapramim.api.compra.DTO.CompraIO;
+import com.daca.listapramim.api.compra.DTO.CompraOutput;
+import com.daca.listapramim.api.compra.model.Compra;
 import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.service.ItemService;
-import com.daca.listapramim.api.listaDeCompras.DTO.EstrategiaInput;
-import com.daca.listapramim.api.listaDeCompras.DTO.ListaIO;
-import com.daca.listapramim.api.listaDeCompras.DTO.ListaInput;
-import com.daca.listapramim.api.listaDeCompras.DTO.ListaOutput;
+import com.daca.listapramim.api.listaDeCompras.DTO.*;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
 import com.daca.listapramim.api.listaDeCompras.service.ListaService;
+import com.daca.listapramim.api.precos.model.MapaDePreco;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.TypeToken;
@@ -45,6 +46,9 @@ public class ListaController {
     private ItemService itemService;
     @Autowired
     private ItemIO itemIO;
+
+    @Autowired
+    private CompraIO compraIO;
 
     @PostMapping({"/", ""})
     @ApiOperation(value = "Create Lista De Compras")
@@ -124,6 +128,42 @@ public class ListaController {
         this.listaService.estrategia(input.getEstrategiaId(), lista, input.getItemId());
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping({"/sugestao/{id}/", "/sugestao/{id}"})
+    @ApiOperation(value = "Get Total Prices in all Establishments")
+    public List<CarrinhoOutput> melhorEstabelecimento(@PathVariable("id") Long id){
+        List<CarrinhoOutput> saida = new ArrayList<>();
+        ListaDeCompra lista = this.listaService.show(id);
+        List<Compra> compras = lista.getCompras();
+        List<String> locais = new ArrayList<>();
+        for (Compra compra: compras) {
+            for (MapaDePreco preco: compra.getItem().getPrecos()) {
+                if(!locais.contains(preco.getLocal())){
+                    locais.add(preco.getLocal());
+                }
+            }
+        }
+
+        for (String local: locais) {
+            CarrinhoOutput carrinhoOutput = new CarrinhoOutput();
+            carrinhoOutput.setLocal(local);
+            List<Compra> com = this.listaService.getItemByLocal(compras, local);
+            Type type = new TypeToken<List<CompraOutput>>() {}.getType();
+            carrinhoOutput.setLista(this.compraIO.toList(com, type));
+            Double total = 0.0;
+            for (Compra compra: com) {
+                for (MapaDePreco preco: compra.getItem().getPrecos()) {
+                    if(preco.getLocal().equalsIgnoreCase(local)){
+                        total += preco.getPreco()*compra.getQtd();
+                    }
+                }
+            }
+            carrinhoOutput.setTotal(total);
+            saida.add(carrinhoOutput);
+        }
+        return saida;
+    }
+
 
 
 }

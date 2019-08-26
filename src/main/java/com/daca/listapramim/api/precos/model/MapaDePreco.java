@@ -24,14 +24,14 @@ public class MapaDePreco implements Serializable, Model<Long> {
 
     @NotNull
     @Column(name = "preco")
-    private BigDecimal preco;
+    private Double preco;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
 
-    public MapaDePreco(@NotEmpty String local, @NotEmpty BigDecimal preco) {
+    public MapaDePreco(@NotEmpty String local, @NotEmpty Double preco) {
         this.local = local;
         this.preco = preco;
     }
@@ -57,11 +57,11 @@ public class MapaDePreco implements Serializable, Model<Long> {
         this.local = local;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 

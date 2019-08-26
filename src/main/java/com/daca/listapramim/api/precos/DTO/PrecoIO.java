@@ -1,6 +1,7 @@
 package com.daca.listapramim.api.precos.DTO;
 
 import com.daca.listapramim.api.item.service.ItemService;
+import com.daca.listapramim.api.listaDeCompras.DTO.CarrinhoOutput;
 import com.daca.listapramim.api.precos.model.MapaDePreco;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -22,6 +23,7 @@ public class PrecoIO {
         this.modelMapper = new ModelMapper();
         this.modelMapper.addConverter(precoInputConverter);
         this.modelMapper.addConverter(precoOutputConverter);
+        this.modelMapper.addConverter(carrinhoOutputConverter);
         this.itemService = itemService;
     }
 
@@ -52,6 +54,16 @@ public class PrecoIO {
         }
     };
 
+    final Converter<MapaDePreco, CarrinhoOutput> carrinhoOutputConverter = new Converter<MapaDePreco, CarrinhoOutput>() {
+        @Override
+        public CarrinhoOutput convert(MappingContext<MapaDePreco, CarrinhoOutput> context) {
+            MapaDePreco preco = context.getSource();
+            CarrinhoOutput output = new CarrinhoOutput();
+            output.setLocal(preco.getLocal());
+            return output;
+        }
+    };
+
     public MapaDePreco mapTo(PrecoInput precoInput){
         return this.modelMapper.map(precoInput, MapaDePreco.class);
     }
@@ -62,6 +74,10 @@ public class PrecoIO {
 
     public List<PrecoOutput> toList(List<MapaDePreco> precos, Type type){
         return this.modelMapper.map(precos, type);
+    }
+
+    public CarrinhoOutput mapToCarrinho(MapaDePreco teste){
+        return this.modelMapper.map(teste, CarrinhoOutput.class);
     }
 
 }

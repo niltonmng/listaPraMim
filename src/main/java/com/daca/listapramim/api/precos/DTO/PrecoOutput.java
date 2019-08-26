@@ -18,7 +18,7 @@ public class PrecoOutput {
 
     @ApiModelProperty(example = "2.33")
     @NotEmpty
-    private BigDecimal preco;
+    private Double preco;
 
     @ApiModelProperty(example = "1")
     @NotEmpty
@@ -36,11 +36,11 @@ public class PrecoOutput {
         this.local = local;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
