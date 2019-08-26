@@ -6,6 +6,7 @@ import com.daca.listapramim.api.item.model.Item;
 import com.daca.listapramim.api.item.repository.ItemRepository;
 import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
 import com.daca.listapramim.api.listaDeCompras.repository.ListaRepository;
+import com.daca.listapramim.api.precos.model.MapaDePreco;
 import com.daca.listapramim.api.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
@@ -101,6 +102,19 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         }
         lista.setCompras(compras);
         this.create(lista);
+    }
+
+
+    public List<Compra> getItemByLocal(List<Compra> compras, String local){
+        List<Compra> comprasSaida = new ArrayList<>();
+        for (Compra compra: compras) {
+            for (MapaDePreco preco: compra.getItem().getPrecos()) {
+                if(preco.getLocal().equalsIgnoreCase(local)){
+                    comprasSaida.add(compra);
+                }
+            }
+        }
+        return comprasSaida;
     }
 
 }
