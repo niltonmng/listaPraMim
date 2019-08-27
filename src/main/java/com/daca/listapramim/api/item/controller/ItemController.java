@@ -66,10 +66,18 @@ public class ItemController {
 
     @ApiOperation(value =  "Get all Item")
     @GetMapping({"/", ""})
-    public List<ItemOutput> index(){
+    public List<ItemOutput> index(@RequestParam(required = false) String categoria, @RequestParam(required = false) String nome){
         LOGGER.info("Index Itens");
         Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-        return this.itemIO.toList(this.itemService.index(), type);
+
+        if(categoria != null){
+            LOGGER.info("Index Order Itens");
+            return this.itemIO.toList(this.itemService.indexByOrderCategory(categoria), type);
+        }else if(nome != null){
+            LOGGER.info("Index Order Itens  By name");
+            return this.itemIO.toList(this.itemService.indexFilterByName(nome), type);
+        }
+        return this.itemIO.toList(this.itemService.indexByOrderName(), type);
     }
 
     @ApiOperation(value = "Update Item")
@@ -92,32 +100,6 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-
-    //Endpoints da ordenação
-
-    @ApiOperation(value = "Get Order items by name")
-    @GetMapping({"/order/name/","/order/name"})
-    public List<ItemOutput> indexOrderByName(){
-        LOGGER.info("Index Order Itens");
-        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-        return this.itemIO.toList(this.itemService.indexByOrderName(), type);
-    }
-
-    @ApiOperation(value = "Get Order items by category")
-    @GetMapping({"/order/categoria/{categoria}/","/order/categoria/{categoria}"})
-    public List<ItemOutput> indexOrderByCategoria(@PathVariable("categoria") String categoria){
-        LOGGER.info("Index Order Itens");
-        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-        return this.itemIO.toList(this.itemService.indexByOrderCategory(categoria), type);
-    }
-
-    @ApiOperation(value="Get filter Items by name")
-    @GetMapping({"/order/filter/{nome}/","/order/filter/{nome}"})
-    public List<ItemOutput> indexFilterItemsByName(@PathVariable("nome") String nome){
-        LOGGER.info("Index Filtered items by name");
-        Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-        return this.itemIO.toList(this.itemService.indexFilterByName(nome), type);
-    }
 
 
 }
