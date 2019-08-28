@@ -61,12 +61,17 @@ public class ListaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping({"/{id}/", "/{id}"})
+    @GetMapping({"/show/", "/show"})
     @ApiOperation(value = "Get A Listas De Compras")
-    public ListaOutput show(@Min(value = 1) @PathVariable("id") Long id) {
-        ListaDeCompra lista = this.listaService.show(id);
-        LOGGER.info("Show Lista de compras com id " + id);
-        return this.listaIO.mapTo(lista);
+    public ListaOutput show(@RequestParam(required = false) Long id, @RequestParam(required = false) String descricao) {
+        if(descricao != null){
+            return this.listaIO.mapTo(this.listaService.getByDescricao(descricao));
+        }else if(id != null){
+            ListaDeCompra lista = this.listaService.show(id);
+            LOGGER.info("Show Lista de compras com id " + id);
+            return this.listaIO.mapTo(lista);
+        }
+        throw new RuntimeException("Algum argumento deve ser passado");
     }
 
     @GetMapping({"/", ""})
@@ -101,7 +106,7 @@ public class ListaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping({"/{id}/itens/", "{id}/itens"})
+    /*@GetMapping({"/{id}/itens/", "{id}/itens"})
     @ApiOperation(value = "Get Itens From Lista de Compras")
     public List<ItemOutput> getItensLista(@Min(value = 1) @PathVariable("id") Long id) {
         ListaDeCompra lista = this.listaService.show(id);
@@ -110,15 +115,7 @@ public class ListaController {
         List<Item> itens = this.listaService.getAllItemsByLista(lista);
         LOGGER.info("Get itens da lista de compras com id " + id);
         return this.itemIO.toList(itens, type);
-    }
-
-    //Pesquisas Lista de compra
-
-    @GetMapping({"/descricao/{descricao}/", "/descricao/{descricao}"})
-    @ApiOperation(value = "Get A Listas De Compras By descricao")
-    public ListaOutput getListaByDescricao(@PathVariable("descricao") String descricao) {
-        return this.listaIO.mapTo(this.listaService.getByDescricao(descricao));
-    }
+    }*/
 
     @PostMapping({"/generate/", "/generate"})
     @ApiOperation(value = "Auto Generate Lista De Compras")

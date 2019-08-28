@@ -48,13 +48,13 @@ public class PrecoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value =  "Get all Precos By Item")
+    /*@ApiOperation(value =  "Get all Precos By Item")
     @GetMapping({"/item/{itemId}/", "/item/{itemId}"})
     public List<PrecoOutput> indexByItemId(@PathVariable("itemId") Long itemId){
         LOGGER.info("Index Preco");
         Type type = new TypeToken<List<PrecoOutput>>() {}.getType();
         return this.precoIO.toList(this.precoService.getByItemId(itemId), type);
-    }
+    }*/
 
     @ApiOperation(value = "Get a Preco")
     @GetMapping({"/{id}/","/{id}"})
