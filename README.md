@@ -1,3 +1,11 @@
+### Features
+
+- Cadastrar itens de forma simples e direta, oferecendo cadastros de diferentes tipos de itens;
+- Cadastrar diferentes preços com diferentes locais para os itens;
+- Criar Lista de compras, para facilitar na hora de comprar seus produtos;
+- Diferentes formas de pesquisas, locais que possuem os itens, preço final da lista de compras para diferentes locais;
+
+
 # Lista pra mim©
 
 
