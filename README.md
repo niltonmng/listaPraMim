@@ -4,11 +4,11 @@
 - Cadastrar diferentes preços com diferentes locais para os itens;
 - Criar Lista de compras, para facilitar na hora de comprar seus produtos;
 - Diferentes formas de pesquisas, locais que possuem os itens, preço final da lista de compras para diferentes locais;
+- Sugestão do melhor estabelecimento para realizar suas compras;
+- Geração automática de lista de compras, diminuindo o trabalho do usuário;
 
 
 # Lista pra mim©
-
-
 
 O Lista pra mim©, é um app que vai revolucionar a forma como você faz compras. Quanto mais você usar o Lista pra mim, mais rápido vai ser gerar novas listas de compras. E você ainda pode economizar anotando preços e locais de compra. Depois é só deixar o  Lista pra mim© indicar o melhor lugar para você fazer suas compras.
 
