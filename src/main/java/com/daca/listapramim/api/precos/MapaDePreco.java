@@ -1,13 +1,12 @@
-package com.daca.listapramim.api.precos.model;
+package com.daca.listapramim.api.precos;
 
-import com.daca.listapramim.api.item.model.Item;
+import com.daca.listapramim.api.item.Item;
 import com.daca.listapramim.api.utils.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tb_preco")

@@ -1,30 +1,24 @@
-package com.daca.listapramim.api.listaDeCompras.controller;
+package com.daca.listapramim.api.listaDeCompras;
 
 import com.daca.listapramim.api.compra.DTO.CompraIO;
 import com.daca.listapramim.api.compra.DTO.CompraOutput;
-import com.daca.listapramim.api.compra.model.Compra;
+import com.daca.listapramim.api.compra.Compra;
 import com.daca.listapramim.api.item.DTO.ItemIO;
-import com.daca.listapramim.api.item.DTO.ItemOutput;
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.service.ItemService;
+import com.daca.listapramim.api.item.ItemService;
 import com.daca.listapramim.api.listaDeCompras.DTO.*;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
-import com.daca.listapramim.api.listaDeCompras.service.ListaService;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
+import com.daca.listapramim.api.precos.MapaDePreco;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

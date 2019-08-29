@@ -1,9 +1,7 @@
-package com.daca.listapramim.api.precos.service;
+package com.daca.listapramim.api.precos;
 
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.repository.ItemRepository;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
-import com.daca.listapramim.api.precos.repository.MapaDePrecoRepository;
+import com.daca.listapramim.api.precos.MapaDePreco;
+import com.daca.listapramim.api.precos.MapaDePrecoRepository;
 import com.daca.listapramim.api.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

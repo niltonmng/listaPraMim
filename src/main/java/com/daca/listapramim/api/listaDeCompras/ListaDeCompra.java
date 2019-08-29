@@ -1,7 +1,6 @@
-package com.daca.listapramim.api.listaDeCompras.model;
+package com.daca.listapramim.api.listaDeCompras;
 
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.item.model.Item;
+import com.daca.listapramim.api.compra.Compra;
 import com.daca.listapramim.api.utils.AuditModel;
 import com.daca.listapramim.api.utils.Model;
 

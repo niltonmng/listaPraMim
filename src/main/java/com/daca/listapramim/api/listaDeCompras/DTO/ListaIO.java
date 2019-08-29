@@ -2,9 +2,7 @@ package com.daca.listapramim.api.listaDeCompras.DTO;
 
 import com.daca.listapramim.api.compra.DTO.CompraIO;
 import com.daca.listapramim.api.compra.DTO.CompraOutput;
-import com.daca.listapramim.api.item.DTO.ItemIO;
-import com.daca.listapramim.api.item.DTO.ItemOutput;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
+import com.daca.listapramim.api.listaDeCompras.ListaDeCompra;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

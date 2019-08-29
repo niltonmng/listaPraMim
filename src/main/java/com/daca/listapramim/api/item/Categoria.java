@@ -1,4 +1,4 @@
-package com.daca.listapramim.api.item.model;
+package com.daca.listapramim.api.item;
 
 public enum Categoria {
 

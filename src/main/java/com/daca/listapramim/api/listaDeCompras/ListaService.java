@@ -1,19 +1,15 @@
-package com.daca.listapramim.api.listaDeCompras.service;
+package com.daca.listapramim.api.listaDeCompras;
 
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.compra.service.CompraService;
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.repository.ItemRepository;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
-import com.daca.listapramim.api.listaDeCompras.repository.ListaRepository;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
+import com.daca.listapramim.api.compra.Compra;
+import com.daca.listapramim.api.compra.CompraService;
+import com.daca.listapramim.api.item.Item;
+import com.daca.listapramim.api.precos.MapaDePreco;
 import com.daca.listapramim.api.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

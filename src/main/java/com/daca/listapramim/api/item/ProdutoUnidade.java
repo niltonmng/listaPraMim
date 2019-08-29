@@ -1,8 +1,7 @@
-package com.daca.listapramim.api.item.model;
+package com.daca.listapramim.api.item;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
 
 @Entity
 @PrimaryKeyJoinColumn(name="id")

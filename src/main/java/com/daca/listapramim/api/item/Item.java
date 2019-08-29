@@ -1,12 +1,10 @@
-package com.daca.listapramim.api.item.model;
+package com.daca.listapramim.api.item;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
+import com.daca.listapramim.api.compra.Compra;
+import com.daca.listapramim.api.precos.MapaDePreco;
 import com.daca.listapramim.api.utils.Model;
 
 import java.io.Serializable;
