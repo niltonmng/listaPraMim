@@ -69,8 +69,10 @@ public class ItemController {
     public List<ItemOutput> index(@RequestParam(required = false) String categoria, @RequestParam(required = false) String nome){
         LOGGER.info("Index Itens");
         Type type = new TypeToken<List<ItemOutput>>() {}.getType();
-
-        if(categoria != null){
+        if(categoria != null && nome != null){
+            LOGGER.info("Index Order Itens  By Name and Categoria");
+            return this.itemIO.toList(this.itemService.indexByNomeAndCategoria(nome, categoria), type);
+        }else if(categoria != null){
             LOGGER.info("Index Order Itens");
             return this.itemIO.toList(this.itemService.indexByOrderCategory(categoria), type);
         }else if(nome != null){

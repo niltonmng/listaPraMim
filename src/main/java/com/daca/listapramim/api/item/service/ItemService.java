@@ -39,6 +39,11 @@ public class ItemService extends GenericService<Long, Item, ItemRepository> {
 	    return itens;
     }
 
+    public List<Item> indexByNomeAndCategoria(String nome, String categoria){
+		Categoria cat = Categoria.fromName(categoria);
+		return this.itemRepository.findAllByNomeAndAndCategoria(nome, cat);
+	}
+
     public List<Item> indexFilterByName(String nome){
 		return this.itemRepository.findAllByNomeContainingIgnoreCase(nome);
 	}
