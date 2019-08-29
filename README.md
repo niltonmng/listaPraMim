@@ -19,13 +19,14 @@ O Lista pra mim©, é um app que vai revolucionar a forma como você faz compras
 # Informações Técnicas
 
 ### Diagrama ER do Lista pra mim: 
-      https://www.lucidchart.com/invitations/accept/eaf9114e-bf8c-49b3-8296-0c5f8c4bc83a
+ 
+   https://www.lucidchart.com/invitations/accept/eaf9114e-bf8c-49b3-8296-0c5f8c4bc83a
 
 ### Como usar?
-     1) Clone o projeto para sua máquina
-     2) Abra o terminal e entre na pasta do projeto
-     3) execute: `$ mvn clean && mvn spring-boot:run`
+   1) Clone o projeto para sua máquina
+   2) Abra o terminal e entre na pasta do projeto
+   3) execute: `$ mvn clean && mvn spring-boot:run`
    
 ### Acesso aos EndPoints?
-      - Acesse, pelo seu navegador: 
-     http://localhost:8080/swagger-ui.html#/
+   - Acesse, pelo seu navegador: 
+      http://localhost:8080/swagger-ui.html#/
