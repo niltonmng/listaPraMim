@@ -1,8 +1,7 @@
-package com.daca.listapramim.api.listaDeCompras.repository;
+package com.daca.listapramim.api.listaDeCompras;
 
 
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
+import com.daca.listapramim.api.listaDeCompras.ListaDeCompra;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

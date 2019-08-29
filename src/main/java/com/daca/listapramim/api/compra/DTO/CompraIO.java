@@ -1,9 +1,8 @@
 package com.daca.listapramim.api.compra.DTO;
 
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.item.service.ItemService;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
-import com.daca.listapramim.api.listaDeCompras.service.ListaService;
+import com.daca.listapramim.api.compra.Compra;
+import com.daca.listapramim.api.item.ItemService;
+import com.daca.listapramim.api.listaDeCompras.ListaService;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;

@@ -10,15 +10,14 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.daca.listapramim.api.item.model.Categoria;
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.model.ProdutoNaoIndustrializado;
-import com.daca.listapramim.api.item.model.ProdutoQuantidadeFixa;
-import com.daca.listapramim.api.item.model.ProdutoUnidade;
+import com.daca.listapramim.api.item.Categoria;
+import com.daca.listapramim.api.item.Item;
+import com.daca.listapramim.api.item.ProdutoNaoIndustrializado;
+import com.daca.listapramim.api.item.ProdutoQuantidadeFixa;
+import com.daca.listapramim.api.item.ProdutoUnidade;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Set;
 
 @Component("itemIO")
 public class ItemIO {

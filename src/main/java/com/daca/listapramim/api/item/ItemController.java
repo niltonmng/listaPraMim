@@ -1,14 +1,9 @@
-package com.daca.listapramim.api.item.controller;
+package com.daca.listapramim.api.item;
 
 import com.daca.listapramim.api.item.DTO.ItemIO;
 import com.daca.listapramim.api.item.DTO.ItemInput;
 import com.daca.listapramim.api.item.DTO.ItemOutput;
-import com.daca.listapramim.api.item.model.Categoria;
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.model.ProdutoUnidade;
-import com.daca.listapramim.api.item.service.ItemService;
 import com.daca.listapramim.api.precos.DTO.PrecoIO;
-import com.daca.listapramim.api.precos.DTO.PrecoOutput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.TypeToken;

@@ -1,7 +1,7 @@
-package com.daca.listapramim.api.compra.service;
+package com.daca.listapramim.api.compra;
 
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.compra.repository.CompraRepository;
+import com.daca.listapramim.api.compra.Compra;
+import com.daca.listapramim.api.compra.CompraRepository;
 import com.daca.listapramim.api.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;

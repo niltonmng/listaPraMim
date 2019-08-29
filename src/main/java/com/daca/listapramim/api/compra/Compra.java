@@ -1,7 +1,7 @@
-package com.daca.listapramim.api.compra.model;
+package com.daca.listapramim.api.compra;
 
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.listaDeCompras.model.ListaDeCompra;
+import com.daca.listapramim.api.item.Item;
+import com.daca.listapramim.api.listaDeCompras.ListaDeCompra;
 import com.daca.listapramim.api.utils.Model;
 
 import javax.persistence.*;

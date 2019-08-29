@@ -1,17 +1,15 @@
-package com.daca.listapramim.api.item.service;
+package com.daca.listapramim.api.item;
 
-import com.daca.listapramim.api.item.model.Categoria;
-import com.daca.listapramim.api.item.model.Item;
-import com.daca.listapramim.api.item.repository.ItemRepository;
+import com.daca.listapramim.api.item.Categoria;
+import com.daca.listapramim.api.item.Item;
+import com.daca.listapramim.api.item.ItemRepository;
 import com.daca.listapramim.api.utils.GenericService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service

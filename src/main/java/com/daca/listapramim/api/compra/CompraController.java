@@ -1,12 +1,10 @@
-package com.daca.listapramim.api.compra.controller;
+package com.daca.listapramim.api.compra;
 
 import com.daca.listapramim.api.compra.DTO.CompraIO;
 import com.daca.listapramim.api.compra.DTO.CompraInput;
 import com.daca.listapramim.api.compra.DTO.CompraOutput;
-import com.daca.listapramim.api.compra.model.Compra;
-import com.daca.listapramim.api.compra.service.CompraService;
-import com.daca.listapramim.api.item.service.ItemService;
-import com.daca.listapramim.api.listaDeCompras.service.ListaService;
+import com.daca.listapramim.api.item.ItemService;
+import com.daca.listapramim.api.listaDeCompras.ListaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/compra")

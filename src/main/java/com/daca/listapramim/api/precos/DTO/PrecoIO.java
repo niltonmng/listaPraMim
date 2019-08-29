@@ -1,8 +1,8 @@
 package com.daca.listapramim.api.precos.DTO;
 
-import com.daca.listapramim.api.item.service.ItemService;
+import com.daca.listapramim.api.item.ItemService;
 import com.daca.listapramim.api.listaDeCompras.DTO.CarrinhoOutput;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
+import com.daca.listapramim.api.precos.MapaDePreco;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;

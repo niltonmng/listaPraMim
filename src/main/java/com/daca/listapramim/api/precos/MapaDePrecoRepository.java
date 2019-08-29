@@ -1,6 +1,6 @@
-package com.daca.listapramim.api.precos.repository;
+package com.daca.listapramim.api.precos;
 
-import com.daca.listapramim.api.precos.model.MapaDePreco;
+import com.daca.listapramim.api.precos.MapaDePreco;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

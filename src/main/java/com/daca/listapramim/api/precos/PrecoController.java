@@ -1,14 +1,10 @@
-package com.daca.listapramim.api.precos.controller;
+package com.daca.listapramim.api.precos;
 
-import com.daca.listapramim.api.item.DTO.ItemOutput;
 import com.daca.listapramim.api.precos.DTO.PrecoIO;
 import com.daca.listapramim.api.precos.DTO.PrecoInput;
 import com.daca.listapramim.api.precos.DTO.PrecoOutput;
-import com.daca.listapramim.api.precos.model.MapaDePreco;
-import com.daca.listapramim.api.precos.service.PrecoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import java.lang.reflect.Type;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/preco")

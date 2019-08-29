@@ -1,13 +1,10 @@
-package com.daca.listapramim.api.item.repository;
+package com.daca.listapramim.api.item;
 
-import com.daca.listapramim.api.item.model.Categoria;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.daca.listapramim.api.item.Categoria;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.daca.listapramim.api.item.model.Item;
-import org.springframework.data.jpa.repository.Query;
+import com.daca.listapramim.api.item.Item;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
