@@ -16,6 +16,10 @@ public class ListaInput {
     public ListaInput() {
     }
 
+    public ListaInput(@NotEmpty String descricao) {
+        this.descricao = descricao;
+    }
+
     public String getDescricao() {
         return descricao;
     }

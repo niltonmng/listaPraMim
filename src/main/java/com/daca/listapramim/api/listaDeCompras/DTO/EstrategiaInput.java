@@ -6,10 +6,10 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "estrategiaInput")
 public class  EstrategiaInput {
 
-    @ApiModelProperty(example = "1", required = true)
+    @ApiModelProperty(example = "1")
     private Long estrategiaId;
 
-    @ApiModelProperty(example = "Supermercado BaratoD+", required = true)
+    @ApiModelProperty(example = "feira 23/05/2017", required = true)
     private String descricao;
 
     @ApiModelProperty(example = "1")

@@ -81,8 +81,8 @@ public class ListaService extends GenericService<Long, ListaDeCompra, ListaRepos
         return itens;
     }
 
-    public ListaDeCompra getByDescricao(String descricao){
-        return this.listaRepository.findByDescricao(descricao);
+    public List<ListaDeCompra> getByDescricao(String descricao){
+        return this.listaRepository.findAllByDescricao(descricao);
     }
 
 
