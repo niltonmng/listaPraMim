@@ -13,7 +13,7 @@ import java.util.List;
 public interface ListaRepository extends JpaRepository<ListaDeCompra, Long> {
 
     List<ListaDeCompra> findAllByDescricaoContainingIgnoreCase(String descricao);
-    ListaDeCompra findByDescricao(String descricao);
+    List<ListaDeCompra> findAllByDescricao(String descricao);
 
     @Query(value = "SELECT *FROM tb_lista WHERE id = (SELECT MAX( id ) FROM tb_lista)", nativeQuery = true)
     ListaDeCompra ultimaLista();

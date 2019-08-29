@@ -52,35 +52,41 @@ public class ListaController {
 
     @PostMapping({"/", ""})
     @ApiOperation(value = "Create Lista De Compras")
-    public ResponseEntity create(@Valid @RequestBody ListaInput listaInput) {
-        LOGGER.info("Criando Lista de Compras");
-        ListaDeCompra listaDeCompra = this.listaIO.mapTo(listaInput);
-        listaDeCompra.setCreatedAt(LocalDateTime.now());
-        this.listaService.create(listaDeCompra);
-        LOGGER.info("Lista de Compras criada");
-        return ResponseEntity.ok().build();
+    public ResponseEntity create( @Valid @RequestBody EstrategiaInput input) {
+        if(input.getEstrategiaId() != null){
+            LOGGER.info("Geração Automática Lista de Compras com a Estratégia "+ input.getEstrategiaId());
+            return this.generateLista(input);
+        }else{
+            LOGGER.info("Criando Lista de Compras");
+            ListaDeCompra listaDeCompra = this.listaIO.mapTo(new ListaInput(input.getDescricao()));
+            listaDeCompra.setCreatedAt(LocalDateTime.now());
+            this.listaService.create(listaDeCompra);
+            LOGGER.info("Lista de Compras criada");
+            return ResponseEntity.ok().build();
+        }
     }
 
-    @GetMapping({"/show/", "/show"})
+    @GetMapping({"/{id}/", "/{id}"})
     @ApiOperation(value = "Get A Listas De Compras")
-    public ListaOutput show(@RequestParam(required = false) Long id, @RequestParam(required = false) String descricao) {
-        if(descricao != null){
-            return this.listaIO.mapTo(this.listaService.getByDescricao(descricao));
-        }else if(id != null){
+    public ListaOutput show(@Min(value = 1) @PathVariable("id") Long id) {
             ListaDeCompra lista = this.listaService.show(id);
             LOGGER.info("Show Lista de compras com id " + id);
             return this.listaIO.mapTo(lista);
-        }
-        throw new RuntimeException("Algum argumento deve ser passado");
     }
 
     @GetMapping({"/", ""})
     @ApiOperation(value = "Get All Listas De Compras")
-    public List<ListaOutput> index() {
-        List<ListaDeCompra> listas = this.listaService.index();
+    public List<ListaOutput> index(@RequestParam(required = false) String descricao) {
         Type type = new TypeToken<List<ListaOutput>>() {
         }.getType();
-        LOGGER.info("Index Lista de compras");
+        List<ListaDeCompra> listas = new ArrayList<ListaDeCompra>();
+        if(descricao != null){
+            listas = this.listaService.getByDescricao(descricao);
+            LOGGER.info("Index All Lista de compras By Descrição");
+        }else{
+            listas = this.listaService.index();
+            LOGGER.info("Index All Lista de compras");
+        }
         return this.listaIO.toList(listas, type);
     }
 
@@ -117,9 +123,7 @@ public class ListaController {
         return this.itemIO.toList(itens, type);
     }*/
 
-    @PostMapping({"/generate/", "/generate"})
-    @ApiOperation(value = "Auto Generate Lista De Compras")
-    public ResponseEntity generateLista(EstrategiaInput input){
+    private ResponseEntity generateLista(EstrategiaInput input){
         ListaDeCompra lista = this.listaIO.mapTo(input);
         lista.setCreatedAt(LocalDateTime.now());
         this.listaService.estrategia(input.getEstrategiaId(), lista, input.getItemId());
