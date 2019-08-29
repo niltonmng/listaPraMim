@@ -50,6 +50,8 @@ public class CompraController {
         return this.compraIO.mapTo(compra);
     }
 
+    @ApiOperation(value = "Delete A Compra")
+    @DeleteMapping({"/{id}/","/{id}"})
     public ResponseEntity delete(@Min(value = 1) @PathVariable("id") Long id){
         this.compraService.delete(id);
         return ResponseEntity.ok().build();
