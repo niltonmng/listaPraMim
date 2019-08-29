@@ -20,7 +20,7 @@ O Lista pra mim©, é um app que vai revolucionar a forma como você faz compras
 
 ### Diagrama ER do Lista pra mim: 
  
-   https://www.lucidchart.com/invitations/accept/eaf9114e-bf8c-49b3-8296-0c5f8c4bc83a
+   - https://www.lucidchart.com/invitations/accept/eaf9114e-bf8c-49b3-8296-0c5f8c4bc83a
 
 ### Como usar?
    1) Clone o projeto para sua máquina
